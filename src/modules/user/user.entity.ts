@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import * as bcrypt from "bcrypt";
 import { UserRole } from "./type";
+import { Post } from "../post/post.entity";
 
 @Entity("users")
 export class User {
@@ -24,6 +25,9 @@ export class User {
 
   @Column({ type: "int" })
   role: UserRole;
+
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
 
   public async hashPassword(password: string) {
     this.password = await bcrypt.hash(password, 10);
