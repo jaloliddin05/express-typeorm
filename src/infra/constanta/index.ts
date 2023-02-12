@@ -1,0 +1,1 @@
+export {default as IGNORE} from './ignore-routs-middleware'
